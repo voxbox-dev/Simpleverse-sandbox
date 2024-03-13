@@ -3,11 +3,11 @@ CompatibilityAssetBundleManifest:
   AssetBundleInfos:
     Info_0:
       Name: simpleverse-feature-dialoguesystem_0
-      Hash: 84e113b8aba6ba2860752fe4405dbabb
-      CRC: 3807027918
+      Hash: 76b75c469b1305ae96cd5f404e4f2c9f
+      CRC: 1961757365
       Dependencies: {}
     Info_1:
       Name: simpleverse-feature-dialoguesystem_csharp-assembly
-      Hash: 85a0769c09956f48a92e59a50e4c1e37
-      CRC: 3534400626
+      Hash: ae5d30b5a12d0fa5fa00917f654dac5c
+      CRC: 3015702003
       Dependencies: {}

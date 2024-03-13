@@ -9,34 +9,41 @@ namespace Simpleverse
     {
         // VARIABLES
         private bool isMoveDisabled = false;
-        // CUSTOM METHODS
-        public void TogglePlayerMove(GameObject npc, bool disableMovement)
+
+        // METHODS
+        public void TogglePlayerMove(bool disableMovement)
         {
             isMoveDisabled = disableMovement;
 
+
             if (isMoveDisabled)
             {
-                Debug.Log("Disable Movement");
+                // Capture and ignore input controls
                 SpatialBridge.inputService.StartAvatarInputCapture(isMoveDisabled, isMoveDisabled, isMoveDisabled, false, this);
                 OnInputCaptureStarted(InputCaptureType.Avatar);
-                StopAvatarMovement(npc);
+                StopAvatarMovement();
             }
             else
             {
-                Debug.Log("Enable Movement");
+                // stop capturing input and re-enable control overrides
                 SpatialBridge.inputService.ReleaseInputCapture(this);
                 OnInputCaptureStopped(InputCaptureType.Avatar);
             }
         }
-        private void StopAvatarMovement(GameObject npc)
+        private void StopAvatarMovement()
         {
-            // stop avatar movement 
+            // stop avatar movement in case player holds down movement key while interacting
             SpatialBridge.actorService.localActor.avatar.Move(Vector3.zero);
-            // set rotation to face npc or other object
-            Vector3 lookPos = npc.transform.position - SpatialBridge.actorService.localActor.avatar.position;
-            lookPos.y = 0;
+        }
+
+        public void RotateAvatarTowards(GameObject obj)
+        {
+            // set rotation to face object 
+            Vector3 myAvatarPosition = SpatialBridge.actorService.localActor.avatar.position;
+            Vector3 lookPos = obj.transform.position - myAvatarPosition;
+            lookPos.y = 1;
             Quaternion rotation = Quaternion.LookRotation(lookPos);
-            SpatialBridge.actorService.localActor.avatar.SetPositionRotation(SpatialBridge.actorService.localActor.avatar.position, rotation);
+            SpatialBridge.actorService.localActor.avatar.SetPositionRotation(myAvatarPosition, rotation);
         }
 
         // INTERFACE METHODS
@@ -67,15 +74,14 @@ namespace Simpleverse
 
         public void OnInputCaptureStarted(InputCaptureType type)
         {
-            Debug.Log("Input Capture Started");
+
 
         }
 
         public void OnInputCaptureStopped(InputCaptureType type)
         {
-            Debug.Log("Input Capture Stopped");
-        }
 
+        }
 
     }
 }
