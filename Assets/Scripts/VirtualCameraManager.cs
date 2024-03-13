@@ -7,44 +7,37 @@ namespace Simpleverse
 {
     public class VirtualCameraManager : MonoBehaviour
     {
-        //         [SerializeField]
-        //         private GameObject npcCamera;
-        // 
-        //         public void StartNPCCamera()
-        //         {
-        //             if (SpatialBridge.cameraService != null)
-        //             {
-        //                 Debug.Log("StartNPCCamera:");
-        //                 // Toggle camera on/off
-        //                 npcCamera.SetActive(!npcCamera.activeSelf);
-        //             }
-        //             else
-        //             {
-        //                 Debug.Log("SpatialBridge.cameraService is null");
-        //             }
-        //         }
-
-        [SerializeField]
-        private GameObject NPCVirtualCameraObj;
-
-        public void FocusOnNPC(Transform NPC)
+        public void DisableCamera(GameObject camera)
         {
-            bool isCameraActive = NPCVirtualCameraObj.activeSelf;
+            camera.SetActive(false);
+        }
 
-            if (NPCVirtualCameraObj != null && NPC != null)
+        public void EnableCamera(GameObject camera)
+        {
+            camera.SetActive(true);
+        }
+
+        public void FirstPersonPOV(bool isEnabled)
+        {
+            SpatialBridge.cameraService.forceFirstPerson = isEnabled;
+        }
+
+        public void FocusOnNPC(GameObject camera, GameObject targetObj)
+        {
+            if (targetObj != null)
             {
-                if (!isCameraActive)
+                Transform targetsTransform = targetObj.transform;
+                if (!camera.activeSelf)
                 {
-                    Debug.Log("NPCVirtualCameraObj is not active");
-                    NPCVirtualCameraObj.transform.position = NPC.position + new Vector3(0, 0.5f, -3); // Position the camera slightly above and behind the NPC
-                    NPCVirtualCameraObj.transform.LookAt(NPC); // Make the camera always look at the NPC
-                    NPCVirtualCameraObj.SetActive(true);
+                    EnableCamera(camera);
                 }
-                else
-                {
-                    NPCVirtualCameraObj.SetActive(false);
-                    Debug.Log("NPCVirtualCameraObj is already active");
-                }
+
+                // Position the camera slightly above and behind the NPC
+                camera.transform.position = targetsTransform.position + new Vector3(0, 0.5f, -3f);
+
+
+                // Make the camera always look at the NPC
+                camera.transform.LookAt(targetsTransform);
             }
             else
             {
@@ -53,6 +46,7 @@ namespace Simpleverse
         }
 
     }
+
 }
 
 
