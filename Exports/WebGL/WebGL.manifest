@@ -2,12 +2,12 @@ ManifestFileVersion: 1
 CompatibilityAssetBundleManifest:
   AssetBundleInfos:
     Info_0:
-      Name: simpleverse-feature-dialoguesystem_0
-      Hash: 76b75c469b1305ae96cd5f404e4f2c9f
-      CRC: 1961757365
+      Name: simpleverse-sandbox_0
+      Hash: f9568b4b226d463ed8e60c9d80a44802
+      CRC: 1926502334
       Dependencies: {}
     Info_1:
-      Name: simpleverse-feature-dialoguesystem_csharp-assembly
-      Hash: ae5d30b5a12d0fa5fa00917f654dac5c
-      CRC: 3015702003
+      Name: simpleverse-sandbox_csharp-assembly
+      Hash: c2d7416ed7c273d3656f564b8c2cf05e
+      CRC: 3810602143
       Dependencies: {}
