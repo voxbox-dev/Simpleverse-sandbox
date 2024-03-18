@@ -2,12 +2,12 @@ ManifestFileVersion: 1
 CompatibilityAssetBundleManifest:
   AssetBundleInfos:
     Info_0:
-      Name: simpleverse-sandbox_0
-      Hash: f9568b4b226d463ed8e60c9d80a44802
-      CRC: 1926502334
+      Name: simpleversesandbox_0
+      Hash: 22dc65acf5fdf8459c568e9686828c1a
+      CRC: 1198174850
       Dependencies: {}
     Info_1:
-      Name: simpleverse-sandbox_csharp-assembly
-      Hash: c2d7416ed7c273d3656f564b8c2cf05e
-      CRC: 3810602143
+      Name: simpleversesandbox_csharp-assembly
+      Hash: 199f493e408a37fc44c9fe2dd229389f
+      CRC: 3821030553
       Dependencies: {}
