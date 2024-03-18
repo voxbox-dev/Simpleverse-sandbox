@@ -11,7 +11,6 @@ namespace Simpleverse
         public Image actorImageObj;
         public TMP_Text actorName;
         public TMP_Text messageText;
-        public RectTransform backgroundBox;
         private Message[] messagesArr;
         private Actor[] actorsArr;
         private int activeMessageIndx;
