@@ -3,8 +3,8 @@ CompatibilityAssetBundleManifest:
   AssetBundleInfos:
     Info_0:
       Name: simpleversesandbox_0
-      Hash: 22dc65acf5fdf8459c568e9686828c1a
-      CRC: 1198174850
+      Hash: bd7a9a561c08d7ffc997e7cf046734fd
+      CRC: 2572695943
       Dependencies: {}
     Info_1:
       Name: simpleversesandbox_csharp-assembly
