@@ -17,17 +17,18 @@ namespace Simpleverse
         public static bool isActive = false;
         private PlayerController playerControllerObj;
         private VirtualCameraManager cameraManagerObj;
-        private GameObject triggerObj;
         [SerializeField]
         private GameObject cameraNPC;
         [SerializeField]
         private GameObject dialoguePanel;
+        [SerializeField]
+        private Button dialogueActionBtn;
 
         void Start()
         {
             playerControllerObj = FindAnyObjectByType<PlayerController>();
             cameraManagerObj = FindAnyObjectByType<VirtualCameraManager>();
-            triggerObj = FindAnyObjectByType<DialogueTrigger>().gameObject;
+
             if (dialoguePanel.activeSelf == true)
             {
                 // Ensures the dialogue default state is hiding
@@ -35,7 +36,7 @@ namespace Simpleverse
             }
         }
 
-        public void OpenDialogue(Message[] messages, Actor[] actors)
+        public void OpenDialogue(Message[] messages, Actor[] actors, GameObject triggerObj)
         {
             if (!isActive)
             {
@@ -44,6 +45,9 @@ namespace Simpleverse
                 actorsArr = actors;
                 activeMessageIndx = 0;
                 isActive = true;
+
+                // attach action to the dialogue button
+                dialogueActionBtn.onClick.AddListener(NextMessage);
 
                 // Show Dialogue panel
                 dialoguePanel.SetActive(true);
@@ -101,6 +105,9 @@ namespace Simpleverse
 
             // Re-enable player movement
             playerControllerObj.TogglePlayerMove(false);
+
+            // Remove click listener from button
+            dialogueActionBtn.onClick.RemoveAllListeners();
         }
 
         private void ToggleSpatialGUI(bool isEnabled)

@@ -8,13 +8,17 @@ namespace Simpleverse
 {
     public class DialogueTrigger : MonoBehaviour
     {
+        private DialogueManager dialogueManagerObj;
+
+        [SerializeField]
+        private GameObject triggerObj;
         public Message[] messages;
         public Actor[] actors;
-        private DialogueManager dialogueManagerObj;
+
 
         public void StartDialogue()
         {
-            dialogueManagerObj.OpenDialogue(messages, actors);
+            dialogueManagerObj.OpenDialogue(messages, actors, triggerObj);
         }
         void Awake()
         {
