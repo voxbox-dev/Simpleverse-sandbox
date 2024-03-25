@@ -4565,6 +4565,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Trigger (Collectable)_2
       objectReference: {fileID: 0}
+    - target: {fileID: 2206187583414830682, guid: 2a594347aa9b04d1c97a761e97f7743c,
+        type: 3}
+      propertyPath: onEnterEvent.questEvent.events.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2a594347aa9b04d1c97a761e97f7743c, type: 3}
 --- !u!4 &801240337 stripped
@@ -7101,6 +7106,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2206187583414830682, guid: 2a594347aa9b04d1c97a761e97f7743c,
         type: 3}
+      propertyPath: onEnterEvent.questEvent.events.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2206187583414830682, guid: 2a594347aa9b04d1c97a761e97f7743c,
+        type: 3}
       propertyPath: onEnterEvent.unityEvent.m_PersistentCalls.m_Calls.Array.size
       value: 4
       objectReference: {fileID: 0}
@@ -9210,6 +9220,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Trigger (Collectable)_3
       objectReference: {fileID: 0}
+    - target: {fileID: 2206187583414830682, guid: 2a594347aa9b04d1c97a761e97f7743c,
+        type: 3}
+      propertyPath: onEnterEvent.questEvent.events.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2a594347aa9b04d1c97a761e97f7743c, type: 3}
 --- !u!4 &1516242248 stripped
@@ -9955,6 +9970,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Trigger (Collectable)_4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2206187583414830682, guid: 2a594347aa9b04d1c97a761e97f7743c,
+        type: 3}
+      propertyPath: onEnterEvent.questEvent.events.Array.size
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2a594347aa9b04d1c97a761e97f7743c, type: 3}
