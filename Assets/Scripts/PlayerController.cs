@@ -11,7 +11,7 @@ namespace Simpleverse
         private bool isMoveDisabled = false;
 
         // METHODS
-        public void TogglePlayerMove(bool disableMovement)
+        public void DisablePlayerMove(bool disableMovement)
         {
             isMoveDisabled = disableMovement;
 
@@ -38,6 +38,7 @@ namespace Simpleverse
 
         public void RotateAvatarTowards(GameObject obj)
         {
+
             // set rotation to face object 
             Vector3 myAvatarPosition = SpatialBridge.actorService.localActor.avatar.position;
             Vector3 lookPos = obj.transform.position - myAvatarPosition;

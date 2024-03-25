@@ -56,9 +56,9 @@ namespace Simpleverse
                 ToggleSpatialGUI(isActive);
                 // Disable movement
                 playerControllerObj.RotateAvatarTowards(triggerObj);
-                playerControllerObj.TogglePlayerMove(isActive);
+                playerControllerObj.DisablePlayerMove(isActive);
                 // Focus camera on NPC
-                cameraManagerObj.FocusOnNPC(cameraNPC, triggerObj);
+                cameraManagerObj.FocusOnNPC(triggerObj);
                 DisplayMessage();
             }
 
@@ -97,14 +97,14 @@ namespace Simpleverse
             messageText.SetText("");
 
             // Reset Camera
-            cameraManagerObj.DisableCamera(cameraNPC);
+            cameraManagerObj.DisableCamera();
             // Hide Dialogue
             dialoguePanel.SetActive(false);
             // Show SpatialUI
             ToggleSpatialGUI(false);
 
             // Re-enable player movement
-            playerControllerObj.TogglePlayerMove(false);
+            playerControllerObj.DisablePlayerMove(false);
 
             // Remove click listener from button
             dialogueActionBtn.onClick.RemoveAllListeners();
