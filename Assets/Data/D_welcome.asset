@@ -12,28 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8cde53b48b7e4f4280530b064c1e6ed, type: 3}
   m_Name: D_welcome
   m_EditorClassIdentifier: 
-  RootNodeID: 1
+  RootNodeID: 0
   Nodes:
-  - ID: 1
+  - ID: 0
     dialogueText: Welcome to SimpleVerse!
-    responses:
-    - responseText: Continue
-      nextNodeID: 2
-  - ID: 2
+    responses: []
+  - ID: 1
     dialogueText: I have a mission for you if you choose to accept...
-    responses:
-    - responseText: Yes, Im ready!
-      nextNodeID: 3
-    - responseText: No, I am not!
-      nextNodeID: 4
-  - ID: 3
-    dialogueText: Great! Head to the Library and look out for 3 floating books where
-      a video will be to learn about the metaverse...
-    responses:
-    - responseText: Close
-      nextNodeID: -1
-  - ID: 4
-    dialogueText: No worries! Come back here and talk to me again when you are ready
-    responses:
-    - responseText: Close
-      nextNodeID: -1
+    responses: []
+  - ID: 2
+    dialogueText: Head to the Library and look out for 3 floating books where a video
+      will be to learn about the metaverse...
+    responses: []

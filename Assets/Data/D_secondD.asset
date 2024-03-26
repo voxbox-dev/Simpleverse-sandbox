@@ -16,13 +16,10 @@ MonoBehaviour:
   Nodes:
   - ID: 0
     dialogueText: Second Dialogue box...
-    responses:
-    - responseText: Continue
-      nextNodeID: 1
-    - responseText: Close
-      nextNodeID: -1
+    responses: []
   - ID: 1
+    dialogueText: ...This only a test...
+    responses: []
+  - ID: 2
     dialogueText: ...Go on close this box now
-    responses:
-    - responseText: Close
-      nextNodeID: -1
+    responses: []
