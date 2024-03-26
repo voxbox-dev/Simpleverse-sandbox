@@ -5,51 +5,82 @@ using UnityEngine;
 
 namespace Simpleverse
 {
-    [RequireComponent(typeof(SpatialInteractable))]
+
     public class DialogueActor : MonoBehaviour
     {
         [SerializeField]
         private string speakerName;
         [SerializeField]
         private DialogueSO dialogue;
-        private SpatialInteractable interactable;
-        private DialogueManager2 dialogueManager;
+        [SerializeField]
+        private float interactionDistance = 1f; // The distance from the NPC when interacting
+
+        [SerializeField]
+        private SpatialInteractable interactableStart;
+        [SerializeField]
+        private GameObject interactableContinue;
+        private DialogueManager dialogueManager;
         private VirtualCameraManager virtualCameraManager;
         private PlayerController playerController;
-        [SerializeField]
-        private float interactionDistance = 1f; // The distance the player should stand from the NPC when interacting
+        private bool hasInteractionStarted;
+        private int currNodeID;
         void Start()
         {
-            interactable = GetComponent<SpatialInteractable>();
-            interactable.onInteractEvent += OnInteract;
-            dialogueManager = FindAnyObjectByType<DialogueManager2>();
+            interactableContinue.SetActive(false);
+            interactableStart.gameObject.SetActive(true);
+            interactableStart.onInteractEvent += OnInteract;
+            interactableContinue.GetComponent<SpatialInteractable>().onInteractEvent += OnInteract;
+            dialogueManager = FindAnyObjectByType<DialogueManager>();
             virtualCameraManager = FindAnyObjectByType<VirtualCameraManager>();
             playerController = FindAnyObjectByType<PlayerController>();
+            hasInteractionStarted = false;
         }
 
         public void OnInteract()
         {
-
-            playerController.DisablePlayerMove(true); // disable movement
-            FaceNPC();
-            SpeakTo();
+            if (hasInteractionStarted == false)
+            {
+                // On first interaction...
+                playerController.DisablePlayerMove(true); // disable movement
+                FaceNPC();
+                dialogueManager.SetDialoguePosition(transform.position);
+                currNodeID = dialogue.RootNodeID;
+                interactableStart.gameObject.SetActive(false);
+                interactableContinue.SetActive(true);
+                hasInteractionStarted = true;
+            }
+            SpeakTo(currNodeID);
+            currNodeID++;
 
         }
-        public void OnEndInteract()
+        void OnEndInteract()
         {
-
+            dialogueManager.EndDialogue();
+            hasInteractionStarted = false;
+            interactableStart.gameObject.SetActive(true);
+            interactableContinue.SetActive(false);
             playerController.DisablePlayerMove(false); // enable movement
             virtualCameraManager.DeactivateFirstPersonPOV();
         }
-        void SpeakTo()
+
+
+        void SpeakTo(int currNodeID)
         {
-            Vector3 dialoguePosition = transform.position + new Vector3(0, 1F, -0.61f); // Adjust the Y value as needed
-            dialogueManager.SetDialoguePosition(dialoguePosition);
-            dialogueManager.StartDialogue(dialogue, speakerName, dialogue.RootNodeID);
+            if (dialogue.GetNodeByID(currNodeID) == null)
+            {
+                OnEndInteract();
+
+            }
+            else
+            {
+                dialogueManager.StartDialogue(dialogue, speakerName, currNodeID);
+
+            }
         }
         void OnDestroy()
         {
-            interactable.onInteractEvent -= OnInteract;
+            interactableStart.onInteractEvent -= OnInteract;
+            interactableContinue.GetComponent<SpatialInteractable>().onInteractEvent -= OnInteract;
         }
         void FaceNPC()
         {
@@ -64,10 +95,6 @@ namespace Simpleverse
             virtualCameraManager.ActivateFirstPersonPOV();
             SpatialBridge.cameraService.ScreenToWorldPoint(lookPos);
 
-
-
         }
-
-
     }
 }
