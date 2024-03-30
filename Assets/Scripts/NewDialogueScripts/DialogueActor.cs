@@ -35,6 +35,11 @@ namespace Simpleverse
             playerController = FindAnyObjectByType<PlayerController>();
             hasInteractionStarted = false;
         }
+        void Update()
+        {
+            // Rotate the NPC to face the player
+            transform.LookAt(SpatialBridge.actorService.localActor.avatar.position);
+        }
 
         public void OnInteract()
         {
@@ -42,7 +47,7 @@ namespace Simpleverse
             {
                 // On first interaction...
                 playerController.DisablePlayerMove(true); // disable movement
-                FaceNPC();
+                virtualCameraManager.ActivateFirstPersonPOV();
                 dialogueManager.SetDialoguePosition(transform.position);
                 currNodeID = dialogue.RootNodeID;
                 interactableStart.gameObject.SetActive(false);
@@ -81,20 +86,6 @@ namespace Simpleverse
         {
             interactableStart.onInteractEvent -= OnInteract;
             interactableContinue.GetComponent<SpatialInteractable>().onInteractEvent -= OnInteract;
-        }
-        void FaceNPC()
-        {
-            // Calculate the position in front of the NPC
-            Vector3 targetPosition = transform.position - transform.forward * interactionDistance;
-            // Move the player to the target position
-            SpatialBridge.actorService.localActor.avatar.position = targetPosition;
-            // Make the player face the NPC
-            Vector3 lookPos = targetPosition - SpatialBridge.actorService.localActor.avatar.position;
-            Quaternion rotation = Quaternion.LookRotation(lookPos);
-            SpatialBridge.actorService.localActor.avatar.SetPositionRotation(targetPosition, rotation);
-            virtualCameraManager.ActivateFirstPersonPOV();
-            SpatialBridge.cameraService.ScreenToWorldPoint(lookPos);
-
         }
     }
 }

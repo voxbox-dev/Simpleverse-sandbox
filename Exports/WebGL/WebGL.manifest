@@ -3,11 +3,11 @@ CompatibilityAssetBundleManifest:
   AssetBundleInfos:
     Info_0:
       Name: simpleverse-dialogueedit-testvr_0
-      Hash: 1a0014a5213c8c30a6227626df844088
-      CRC: 997538387
+      Hash: 9dfa73c7b4a288cb600e17a8512c40ce
+      CRC: 1503016663
       Dependencies: {}
     Info_1:
       Name: simpleverse-dialogueedit-testvr_csharp-assembly
-      Hash: 645398a31c7bbde427d61f50f36c125e
-      CRC: 3381642177
+      Hash: 961aea2dda8c22e8a0a4e0831be31bef
+      CRC: 1001066136
       Dependencies: {}
