@@ -9,6 +9,7 @@ namespace Simpleverse
     public class QuizManager : MonoBehaviour
     {
 
+        // Serialized Fields
         [SerializeField]
         private QuizData quizData;
         [SerializeField]
@@ -16,47 +17,78 @@ namespace Simpleverse
         [SerializeField]
         private GameObject optionObjectPrefab;
         [SerializeField]
+        private GameObject optionContainer;
+        [SerializeField]
+        private GameObject resultsPrefab;
+        [SerializeField]
+        private Transform resultsContainer;
+
+        [SerializeField]
         private Transform questionContainer;
         [SerializeField]
         private List<Transform> optionContainers;
-
-        private int currentQuestionIndex = 0;
-        private List<GameObject> instantiatedObjects = new List<GameObject>();
-        private float score = 0.0f;
+        [SerializeField]
         private int pointsPerQuestion;
+        // Private Fields
+        private int currentQuestionIndex = 0;
+        private int score = 0;
         private int totalPossibleScore;
-
+        private List<GameObject> instantiatedObjects = new();
         private List<string> wrongQuestions = new List<string>();
+        private string currQuestionText;
+        // Types
+        private Question currQuestion;
+        private QuizQuestion questionObjectScript;
+        private QuizResults resultsObjectScript;
+        // Objects
+        private GameObject questionObject;
+        private GameObject resultsObject;
 
         void Start()
         {
             totalPossibleScore = quizData.questions.Count * pointsPerQuestion;
-            pointsPerQuestion = 10;
+            questionObjectScript = questionObjectPrefab.GetComponent<QuizQuestion>();
+            resultsObjectScript = resultsPrefab.GetComponent<QuizResults>();
         }
-
-        public void DisplayQuestion()
+        public void StartQuiz()
         {
-            // Get the current question
-            Question question = quizData.questions[currentQuestionIndex];
+            if (resultsPrefab) resultsPrefab.SetActive(false);
 
-            // Instantiate the question object and set the question text
-            GameObject questionObject = Instantiate(questionObjectPrefab, questionContainer);
-            questionObject.SetActive(true);
-            instantiatedObjects.Add(questionObject);
-            QuizQuestion questionObjectScript = questionObject.GetComponent<QuizQuestion>();
-            questionObjectScript.SetQuestion(question.questionText);
+            currQuestion = quizData.questions[currentQuestionIndex];
+            currQuestionText = currQuestion.questionText;
 
+            if (currQuestion != null)
+            {
+                // Instantiate the question object and set the question text
+                Debug.Log("QUestion text: " + currQuestionText);
+                questionObjectScript.SetQuestion(currQuestionText);
+                questionObject = Instantiate(questionObjectPrefab, questionContainer);
+                instantiatedObjects.Add(questionObject);
+                questionObject.SetActive(true);
+
+                DisplayOptions(currQuestion);
+            }
+            else
+            {
+                // Instantiate the question object and set the question text
+                Debug.Log("STARTQUIZ - QUESTION NULL:  " + currQuestion);
+            }
+        }
+        public void DisplayOptions(Question question)
+        {
             // Instantiate the option objects and set the option texts
             for (int i = 0; i < question.options.Count; i++)
             {
+                // Must instantiate here, to set the option properties per object correctly
                 GameObject optionObject = Instantiate(optionObjectPrefab, optionContainers[i]);
                 optionObject.SetActive(true);
-                instantiatedObjects.Add(optionObject);
                 QuizOption optionObjectScript = optionObject.GetComponent<QuizOption>();
-                optionObjectScript.SetOption(question.options[i].optionText, i == quizData.questions[currentQuestionIndex].correctAnswerIndex);
+                optionObjectScript.SetOption(question.options[i].optionText, i == question.correctAnswerIndex);
+                instantiatedObjects.Add(optionObject);
+
+                // Debug.Log("OPTION index: " + i + " isCorrect Answer ? " + question.correctAnswerIndex);
             }
         }
-
         public void OnOptionSelected(bool isCorrect)
         {
             if (isCorrect)
@@ -64,20 +96,21 @@ namespace Simpleverse
                 // add/calculate score 
                 score += 10;
                 score /= totalPossibleScore;
+                Debug.Log("CORRECT" + score);
             }
             else
             {
                 // If the wrong option was selected, save question
-                string question = quizData.questions[currentQuestionIndex].questionText;
+                string question = currQuestion.questionText;
                 wrongQuestions.Add(question);
                 Debug.Log("ADDED WRONG QUESTION: " + question);
             }
 
-            // ...go to the next question
-            currentQuestionIndex++;
-            if (currentQuestionIndex < quizData.questions.Count)
+            // If there are more questions, go to the next question
+            if (currentQuestionIndex + 1 < quizData.questions.Count)
             {
-                DisplayQuestion();
+                currentQuestionIndex++;
+                StartQuiz();
             }
             else
             {
@@ -85,31 +118,81 @@ namespace Simpleverse
                 EndQuiz();
             }
         }
-
         void EndQuiz()
         {
-            // Calculate score and show
-            if (score == 0 || score < 60.0f)
+            DestroyInstantiatedObjs();
+            DisplayResults();
+        }
+        public void DisplayResults()
+        {
+            string result;
+            int finalScore = score * 100;
+            string scoreText = finalScore + "%";
+
+            // Pass or Fail?
+            if (score < 1)
             {
-                Debug.Log("FAILED: " + score);
+                result = "FAIL";
+                resultsObjectScript.ShowResultsAction(false);
             }
             else
             {
-                Debug.Log("YOU PASSED !" + score);
-
+                result = "PASS";
+                resultsObjectScript.ShowResultsAction(true);
             }
+            // Set results text
+            resultsObjectScript.SetResultsText(result);
+            resultsObjectScript.SetResultsScoreText(scoreText);
+
+            // Show results panel
+            if (!instantiatedObjects.Contains(resultsPrefab))
+            {
+                resultsObject = Instantiate(resultsPrefab, resultsContainer);
+                instantiatedObjects.Add(resultsObject);
+            }
+            resultsObject.SetActive(true);
         }
 
-        public void Reset()
+        void HideQuizObjects()
         {
-            currentQuestionIndex = 0;
-            score = 0;
+            // Hide the question and option objects
+            foreach (GameObject obj in instantiatedObjects)
+            {
+                obj.SetActive(false);
+            }
+
+        }
+        public void RestartQuiz()
+        {
+            // If hiding objects, Show the question and option objects
+            // foreach (GameObject obj in instantiatedObjects)
+            // {
+            //     obj.SetActive(true);
+            // }
+
+            // Hide the results object
+            resultsObject.SetActive(false);
+
+            StartQuiz();
+
+        }
+        public void ClaimPrize()
+        {
+            DestroyInstantiatedObjs();
+            Reset();
+        }
+        public void DestroyInstantiatedObjs()
+        {
             foreach (GameObject obj in instantiatedObjects)
             {
                 Destroy(obj);
             }
-
             instantiatedObjects.Clear();
+        }
+        public void Reset()
+        {
+            currentQuestionIndex = 0;
+            score = 0;
         }
     }
 
