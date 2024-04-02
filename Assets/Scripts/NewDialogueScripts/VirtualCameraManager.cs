@@ -11,6 +11,9 @@ namespace Simpleverse
         [SerializeField]
         private GameObject virtualCamera;
 
+        [SerializeField]
+        private Vector3 virtualCameraPosition;
+
         public void DisableCamera()
         {
             virtualCamera.SetActive(false);
@@ -39,19 +42,28 @@ namespace Simpleverse
             SpatialBridge.cameraService.forceFirstPerson = false;
         }
 
-        public void FocusOnNPC(GameObject targetObj)
+        public void FocusOnNPC(GameObject targetObj, float interactionDistance)
         {
             if (targetObj != null)
             {
-                Transform targetsTransform = targetObj.transform;
                 if (!virtualCamera.activeSelf)
                 {
                     EnableCamera();
                 }
+                // Calculate the position in front of the NPC
+                Transform targetsTransform = targetObj.transform;
+                Vector3 targetPosition = targetsTransform.position + targetsTransform.forward;
+
+                // Make the player face the NPC
+                Vector3 lookPos = targetPosition - SpatialBridge.actorService.localActor.avatar.position;
+                Quaternion rotation = Quaternion.LookRotation(lookPos);
+                SpatialBridge.actorService.localActor.avatar.rotation = rotation;
+
                 // Position the camera slightly above and behind the NPC
-                SetCameraPosition(targetsTransform.position + new Vector3(0, 0.5f, -3f));
+                SetCameraPosition(targetsTransform.position + virtualCameraPosition);
+                SetCameraRotation(rotation);
                 // Make the camera always look at the NPC
-                virtualCamera.transform.LookAt(targetsTransform);
+                // virtualCamera.transform.LookAt(targetsTransform);
             }
             else
             {
