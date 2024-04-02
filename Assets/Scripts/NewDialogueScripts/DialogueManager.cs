@@ -44,9 +44,6 @@ namespace Simpleverse
             Vector3 dialoguePosition = targetOpbjPosition + DialogueBoxPosition;
             dialogueBoxParent.transform.position = dialoguePosition;
 
-            // Calculate the direction vector from the dialogue box to the player            
-            // Vector3 directionToPlayer = SpatialBridge.actorService.localActor.avatar.position - dialoguePosition;
-
             // Reverse the direction to face away from the player
             Vector3 oppositeDirection = dialoguePosition - SpatialBridge.actorService.localActor.avatar.position;
 
@@ -58,6 +55,7 @@ namespace Simpleverse
 
             // Rotate the dialogueBox to face the player
             dialogueBoxParent.transform.LookAt(targetPosition);
+
 
         }
         void Awake()
