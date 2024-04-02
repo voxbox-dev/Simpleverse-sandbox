@@ -56,7 +56,6 @@ namespace Simpleverse
             // Rotate the dialogueBox to face the player
             dialogueBoxParent.transform.LookAt(targetPosition);
 
-
         }
         void Awake()
         {
