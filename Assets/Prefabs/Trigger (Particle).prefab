@@ -19533,7 +19533,8 @@ AudioSource:
   m_GameObject: {fileID: 9139070368581578331}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -1007645819942920252, guid: 0461beb79fbfa4735867cac3f1f81cd2,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: 211d5f45ee3f54493b4d143121386d43, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -24596,6 +24597,8 @@ MonoBehaviour:
           m_CallState: 2
     animatorEvent:
       events: []
+    questEvent:
+      events: []
   onExitEvent:
     id: 0
     unityEventIsSynced: 0
@@ -24615,6 +24618,8 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     animatorEvent:
+      events: []
+    questEvent:
       events: []
   deprecated_onEnter:
     m_PersistentCalls:
