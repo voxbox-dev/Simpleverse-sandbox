@@ -11,10 +11,7 @@ namespace Simpleverse
 
         public TMP_Text resultsText;
         public TMP_Text resultsScoreText;
-        [SerializeField]
-        private GameObject interactTryAgain;
-        [SerializeField]
-        private GameObject interactClaimPrize;
+
         public void SetResultsText(string text)
         {
             resultsText.text = text;
@@ -23,10 +20,6 @@ namespace Simpleverse
         {
             resultsScoreText.text = text;
         }
-        public void ShowResultsAction(bool isPassedQuiz)
-        {
-            interactTryAgain.SetActive(!isPassedQuiz);
-            interactClaimPrize.SetActive(isPassedQuiz);
-        }
+
     }
 }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using SpatialSys.UnitySDK;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Simpleverse
@@ -22,6 +23,12 @@ namespace Simpleverse
         private GameObject resultsPrefab;
         [SerializeField]
         private Transform resultsContainer;
+        [SerializeField]
+        private GameObject TriggerStart;
+        [SerializeField]
+        private GameObject TriggerRestart;
+        [SerializeField]
+        private GameObject TriggerClaim;
 
         [SerializeField]
         private Transform questionContainer;
@@ -29,13 +36,22 @@ namespace Simpleverse
         private List<Transform> optionContainers;
         [SerializeField]
         private int pointsPerQuestion;
+
+        [SerializeField]
+        private GameObject prizePrefab;
+
+        [SerializeField]
+        private Transform prizeContainer;
+
         // Private Fields
         private int currentQuestionIndex = 0;
         private int score = 0;
         private int totalPossibleScore;
-        private List<GameObject> instantiatedObjects = new();
+        // private List<GameObject> instantiatedObjects = new();
+        private List<GameObject> optionObjects = new();
         private List<string> wrongQuestions = new List<string>();
         private string currQuestionText;
+
         // Types
         private Question currQuestion;
         private QuizQuestion questionObjectScript;
@@ -43,6 +59,8 @@ namespace Simpleverse
         // Objects
         private GameObject questionObject;
         private GameObject resultsObject;
+        private GameObject prizeObject;
+
 
         void Start()
         {
@@ -52,50 +70,65 @@ namespace Simpleverse
         }
         public void StartQuiz()
         {
-            if (resultsPrefab) resultsPrefab.SetActive(false);
-
             currQuestion = quizData.questions[currentQuestionIndex];
             currQuestionText = currQuestion.questionText;
+            TriggerStart.SetActive(false);
 
             if (currQuestion != null)
             {
-                // Instantiate the question object and set the question text
-                Debug.Log("QUestion text: " + currQuestionText);
-                questionObjectScript.SetQuestion(currQuestionText);
-                questionObject = Instantiate(questionObjectPrefab, questionContainer);
-                instantiatedObjects.Add(questionObject);
+                // If the question object already exists, just update the question text
+                if (questionObject != null)
+                {
+                    questionObjectScript = questionObject.GetComponent<QuizQuestion>();
+                    questionObjectScript.SetQuestion(currQuestionText);
+                }
+                else
+                {
+                    // Otherwise, instantiate the question object
+                    questionObject = Instantiate(questionObjectPrefab, questionContainer);
+                    questionObjectScript = questionObject.GetComponent<QuizQuestion>();
+                    questionObjectScript.SetQuestion(currQuestionText);
+                }
+
                 questionObject.SetActive(true);
 
                 DisplayOptions(currQuestion);
             }
             else
             {
-                // Instantiate the question object and set the question text
                 Debug.Log("STARTQUIZ - QUESTION NULL:  " + currQuestion);
             }
         }
         public void DisplayOptions(Question question)
         {
-            // Instantiate the option objects and set the option texts
-            for (int i = 0; i < question.options.Count; i++)
+            // If option objects already exist, just update the option texts
+            if (optionObjects.Count > 0)
             {
-                // Must instantiate here, to set the option properties per object correctly
-                GameObject optionObject = Instantiate(optionObjectPrefab, optionContainers[i]);
-                optionObject.SetActive(true);
-                QuizOption optionObjectScript = optionObject.GetComponent<QuizOption>();
-                optionObjectScript.SetOption(question.options[i].optionText, i == question.correctAnswerIndex);
-                instantiatedObjects.Add(optionObject);
-
-                // Debug.Log("OPTION index: " + i + " isCorrect Answer ? " + question.correctAnswerIndex);
+                for (int i = 0; i < question.options.Count; i++)
+                {
+                    QuizOption optionObjectScript = optionObjects[i].GetComponent<QuizOption>();
+                    optionObjectScript.SetOption(question.options[i].optionText, i == question.correctAnswerIndex);
+                }
+            }
+            else
+            {
+                // Otherwise, instantiate the option objects
+                for (int i = 0; i < question.options.Count; i++)
+                {
+                    GameObject optionObject = Instantiate(optionObjectPrefab, optionContainers[i]);
+                    optionObject.SetActive(true);
+                    QuizOption optionObjectScript = optionObject.GetComponent<QuizOption>();
+                    optionObjectScript.SetOption(question.options[i].optionText, i == question.correctAnswerIndex);
+                    optionObjects.Add(optionObject);
+                }
             }
         }
         public void OnOptionSelected(bool isCorrect)
         {
             if (isCorrect)
             {
-                // add/calculate score 
+                // add to score 
                 score += 10;
-                score /= totalPossibleScore;
                 Debug.Log("CORRECT" + score);
             }
             else
@@ -126,75 +159,115 @@ namespace Simpleverse
         public void DisplayResults()
         {
             string result;
-            int finalScore = score * 100;
+            // Calculate final score as a percentage
+            int finalScore = score * 100 / totalPossibleScore;
             string scoreText = finalScore + "%";
 
             // Pass or Fail?
-            if (score < 1)
+            if (finalScore == 100)
             {
-                result = "FAIL";
-                resultsObjectScript.ShowResultsAction(false);
+                result = "Completed!";
+                ShowResultsAction(true);
             }
             else
             {
-                result = "PASS";
-                resultsObjectScript.ShowResultsAction(true);
+                result = "Try Again";
+                ShowResultsAction(false);
             }
-            // Set results text
-            resultsObjectScript.SetResultsText(result);
-            resultsObjectScript.SetResultsScoreText(scoreText);
 
-            // Show results panel
-            if (!instantiatedObjects.Contains(resultsPrefab))
+            // If the results object already exists, just update the results text
+            if (resultsObject != null)
             {
-                resultsObject = Instantiate(resultsPrefab, resultsContainer);
-                instantiatedObjects.Add(resultsObject);
+                resultsObjectScript = resultsObject.GetComponent<QuizResults>();
+                resultsObjectScript.SetResultsText(result);
+                resultsObjectScript.SetResultsScoreText(scoreText);
             }
+            else
+            {
+                // Otherwise, instantiate the results object
+                resultsObject = Instantiate(resultsPrefab, resultsContainer);
+                resultsObjectScript = resultsObject.GetComponent<QuizResults>();
+                resultsObjectScript.SetResultsText(result);
+                resultsObjectScript.SetResultsScoreText(scoreText);
+            }
+
             resultsObject.SetActive(true);
         }
-
-        void HideQuizObjects()
+        void ShowResultsAction(bool isPassedQuiz)
         {
-            // Hide the question and option objects
-            foreach (GameObject obj in instantiatedObjects)
+            TriggerRestart.SetActive(!isPassedQuiz);
+            // If the prizeObject has been spawned, show the TriggerClaim object
+            if (prizeObject == null)
             {
-                obj.SetActive(false);
+                TriggerClaim.SetActive(true);
             }
-
+            else
+            {
+                TriggerClaim.SetActive(false);
+            }
         }
         public void RestartQuiz()
         {
-            // If hiding objects, Show the question and option objects
-            // foreach (GameObject obj in instantiatedObjects)
-            // {
-            //     obj.SetActive(true);
-            // }
-
             // Hide the results object
             resultsObject.SetActive(false);
-
-            StartQuiz();
-
+            Reset();
+            DestroyInstantiatedObjs();
         }
         public void ClaimPrize()
         {
-            DestroyInstantiatedObjs();
-            Reset();
+            RestartQuiz();
+            SpawnPrize();
+        }
+
+        void SpawnPrize()
+        {
+            // If the prizeObject  already exists, just update the results text
+            if (prizeObject != null)
+            {
+                prizeObject.SetActive(true);
+            }
+            else
+            {
+                // Otherwise, instantiate the results object
+                prizeObject = Instantiate(prizePrefab, prizeContainer);
+            }
         }
         public void DestroyInstantiatedObjs()
         {
-            foreach (GameObject obj in instantiatedObjects)
+
+            // Destroy the question object if it exists
+            if (questionObject != null)
             {
-                Destroy(obj);
+                Destroy(questionObject);
+                questionObject = null;
             }
-            instantiatedObjects.Clear();
+
+            // Destroy the results object if it exists
+            if (resultsObject != null)
+            {
+                Destroy(resultsObject);
+                resultsObject = null;
+            }
+
+            // Destroy the option objects if they exist
+            foreach (GameObject optionObject in optionObjects)
+            {
+                if (optionObject != null)
+                {
+                    Destroy(optionObject);
+                }
+            }
+            optionObjects.Clear();
         }
         public void Reset()
         {
             currentQuestionIndex = 0;
             score = 0;
+            TriggerRestart.SetActive(false);
+            TriggerClaim.SetActive(false);
+            TriggerStart.SetActive(true);
         }
     }
-
-
 }
+
+

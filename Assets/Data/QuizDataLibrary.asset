@@ -19,3 +19,9 @@ MonoBehaviour:
     - optionText: ' A type of virtual reality'
     - optionText: A type of computer virus
     correctAnswerIndex: 1
+  - questionText: What is Life
+    options:
+    - optionText: Orange
+    - optionText: Apple
+    - optionText: Bananna
+    correctAnswerIndex: 2
