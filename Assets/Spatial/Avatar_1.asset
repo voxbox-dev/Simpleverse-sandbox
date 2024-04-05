@@ -16,7 +16,8 @@ MonoBehaviour:
   sku: 
   packageName: Avatar_1
   thumbnail: {fileID: 0}
-  savedProjectSettings: {fileID: 0}
+  savedProjectSettings: {fileID: 11400000, guid: b4d3f3931508d4e3381693ee23f6fe04,
+    type: 2}
   prefab: {fileID: 152906790294688358, guid: effe0da2083e1485bb034b285d7934a5, type: 3}
   usageContext: 0
   category: 0
