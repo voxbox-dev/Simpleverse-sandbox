@@ -2,12 +2,12 @@ ManifestFileVersion: 1
 CompatibilityAssetBundleManifest:
   AssetBundleInfos:
     Info_0:
-      Name: simpleverse-dialogueedit-testvr_0
-      Hash: 73f238074c628c9ffcc1b8e2dc10c5b0
-      CRC: 4175822831
+      Name: simpleverse-sandbox_0
+      Hash: 478db0dcce2b19fd7266b14603ba39cf
+      CRC: 2822920245
       Dependencies: {}
     Info_1:
-      Name: simpleverse-dialogueedit-testvr_csharp-assembly
-      Hash: 1b60b592cebb3cd52b6397d8802ad8b8
-      CRC: 425024142
+      Name: simpleverse-sandbox_csharp-assembly
+      Hash: fe74337f7f42bb05a088a3874c5cecb6
+      CRC: 434459331
       Dependencies: {}
