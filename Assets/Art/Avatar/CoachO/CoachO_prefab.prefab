@@ -1261,8 +1261,10 @@ MonoBehaviour:
   speakerName: Coach O
   dialogue: {fileID: 11400000, guid: aee8ec555a6bd4fb6b112e09ec3aaa75, type: 2}
   interactionDistance: 2
-  interactableStart: {fileID: 0}
-  interactableContinue: {fileID: 0}
+  interactableStart: {fileID: 6773911217343628785, guid: 4d29ee8521aaf4103b37917ceba8e8f4,
+    type: 3}
+  interactableContinue: {fileID: 1503845491658191041, guid: 827aa219d44234941a93221c14227be9,
+    type: 3}
 --- !u!1 &3655995540583668033
 GameObject:
   m_ObjectHideFlags: 0

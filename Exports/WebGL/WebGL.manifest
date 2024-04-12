@@ -3,11 +3,11 @@ CompatibilityAssetBundleManifest:
   AssetBundleInfos:
     Info_0:
       Name: simpleverse-sandbox_0
-      Hash: 478db0dcce2b19fd7266b14603ba39cf
-      CRC: 2822920245
+      Hash: c7df89b1102b14eceea0acbd9abe1294
+      CRC: 215268887
       Dependencies: {}
     Info_1:
       Name: simpleverse-sandbox_csharp-assembly
-      Hash: fe74337f7f42bb05a088a3874c5cecb6
-      CRC: 434459331
+      Hash: 6f30be32fe99904edc99bca7ce8dd90f
+      CRC: 1431705581
       Dependencies: {}

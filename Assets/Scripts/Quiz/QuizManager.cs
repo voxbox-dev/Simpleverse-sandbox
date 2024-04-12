@@ -243,15 +243,13 @@ namespace Simpleverse
         void SpawnPrize()
         {
             // If the prizeObject  already exists, just update the results text
-            if (prizeObject != null)
-            {
-                prizeObject.SetActive(true);
-            }
-            else
+            if (prizeObject == null)
             {
                 // Otherwise, instantiate the results object
                 prizeObject = Instantiate(prizePrefab, prizeContainer);
             }
+
+            prizeObject.SetActive(true);
         }
         public void DestroyInstantiatedObjs()
         {
@@ -299,7 +297,6 @@ namespace Simpleverse
 
             DeactivateAnimations();
             DestroyInstantiatedObjs();
-            Reset();
         }
 
         void ActivateAnimations()

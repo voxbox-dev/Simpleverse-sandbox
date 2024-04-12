@@ -16,9 +16,7 @@ namespace Simpleverse
         private float interactionDistance = 1f; // The distance from the NPC when interacting
 
         [SerializeField]
-        private SpatialInteractable interactableStart;
-        [SerializeField]
-        private GameObject interactableContinue;
+        private SpatialInteractable interactableContinue;
         private DialogueManager dialogueManager;
         private VirtualCameraManager virtualCameraManager;
         private PlayerController playerController;
@@ -26,10 +24,8 @@ namespace Simpleverse
         private int currNodeID;
         void Start()
         {
-            interactableContinue.SetActive(false);
-            interactableStart.gameObject.SetActive(true);
-            interactableStart.onInteractEvent += OnInteract;
-            interactableContinue.GetComponent<SpatialInteractable>().onInteractEvent += OnInteract;
+            interactableContinue.gameObject.SetActive(false);
+            interactableContinue.onInteractEvent += OnInteract;
             dialogueManager = FindAnyObjectByType<DialogueManager>();
             virtualCameraManager = FindAnyObjectByType<VirtualCameraManager>();
             playerController = FindAnyObjectByType<PlayerController>();
@@ -50,8 +46,7 @@ namespace Simpleverse
                 virtualCameraManager.ActivateFirstPersonPOV();
                 dialogueManager.SetDialoguePosition(transform.position);
                 currNodeID = dialogue.RootNodeID;
-                interactableStart.gameObject.SetActive(false);
-                interactableContinue.SetActive(true);
+                interactableContinue.gameObject.SetActive(true);
                 hasInteractionStarted = true;
             }
             SpeakTo(currNodeID);
@@ -62,8 +57,7 @@ namespace Simpleverse
         {
             dialogueManager.EndDialogue();
             hasInteractionStarted = false;
-            interactableStart.gameObject.SetActive(true);
-            interactableContinue.SetActive(false);
+            interactableContinue.gameObject.SetActive(false);
             playerController.DisablePlayerMove(false); // enable movement
             virtualCameraManager.DeactivateFirstPersonPOV();
         }
@@ -84,8 +78,7 @@ namespace Simpleverse
         }
         void OnDestroy()
         {
-            interactableStart.onInteractEvent -= OnInteract;
-            interactableContinue.GetComponent<SpatialInteractable>().onInteractEvent -= OnInteract;
+            interactableContinue.onInteractEvent -= OnInteract;
         }
     }
 }
