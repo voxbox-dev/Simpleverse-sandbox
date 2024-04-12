@@ -15,12 +15,26 @@ MonoBehaviour:
   RootNodeID: 0
   Nodes:
   - ID: 0
-    dialogueText: Welcome to SimpleVerse!
+    dialogueText: "Hey Champ, welcome to The SimpleVerse! I\u2019m Coach O from The
+      Simple Foundation and this is our own metaverse environment...  "
     responses: []
   - ID: 1
-    dialogueText: I have a mission for you if you choose to accept...
+    dialogueText: "You\u2019ll learn more about what a metaverse is soon but it's
+      like a virtual world that you can access anytime..."
     responses: []
   - ID: 2
-    dialogueText: Head to the Library and look out for 3 floating books where a video
-      will be to learn about the metaverse...
+    dialogueText: In the SimpleVerse you can meet up with your friends, go on fun
+      learning challenges earn SimpleTokens and...
+    responses: []
+  - ID: 3
+    dialogueText: ...secure swagged out digital merch such as custom outfits and
+      unique vehicles.
+    responses: []
+  - ID: 4
+    dialogueText: "Here\u2019s our home base, the center of the SimpleVerse - go
+      in and take a look around..."
+    responses: []
+  - ID: 5
+    dialogueText: "When you\u2019re ready, meet me in the Rec Room and I\u2019ll
+      show you a fun mission to earn your first SV Badge"
     responses: []

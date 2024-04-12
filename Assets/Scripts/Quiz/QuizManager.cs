@@ -290,7 +290,7 @@ namespace Simpleverse
         {
             currentQuestionIndex = 0;
             score = 0;
-            TriggerStart.SetActive(true);
+            TriggerStart.SetActive(false);
             // Hide objects
             TriggerRestart.SetActive(false);
             TriggerClaim.SetActive(false);

@@ -90,6 +90,42 @@ MonoBehaviour:
         events: []
       questEvent:
         events: []
+  - id: 2
+    name: Start First Mission
+    type: 0
+    progressSteps: 0
+    taskMarkers:
+    - {fileID: 0}
+    onStartedEvent:
+      id: 0
+      unityEventIsSynced: 0
+      unityEvent:
+        m_PersistentCalls:
+          m_Calls: []
+      animatorEvent:
+        events: []
+      questEvent:
+        events: []
+    onCompletedEvent:
+      id: 0
+      unityEventIsSynced: 0
+      unityEvent:
+        m_PersistentCalls:
+          m_Calls: []
+      animatorEvent:
+        events: []
+      questEvent:
+        events: []
+    onPreviouslyCompleted:
+      id: 0
+      unityEventIsSynced: 0
+      unityEvent:
+        m_PersistentCalls:
+          m_Calls: []
+      animatorEvent:
+        events: []
+      questEvent:
+        events: []
   onStartedEvent:
     id: 0
     unityEventIsSynced: 0
