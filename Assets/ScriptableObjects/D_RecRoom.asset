@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8cde53b48b7e4f4280530b064c1e6ed, type: 3}
+  m_Name: D_RecRoom
+  m_EditorClassIdentifier: 
+  RootNodeID: 0
+  Nodes:
+  - ID: 0
+    dialogueText: "Hey, glad you found the Rec Room! This is where you\u2019ll start
+      your first Learn 2 Earn mission..."
+    responses: []
+  - ID: 1
+    dialogueText: "These missions are designed to teach you some valuable information
+      and as you complete it you\u2019ll be earning digital items and Simple Tokens
+      (ST) !"
+    responses: []
+  - ID: 1
+    dialogueText: "Use ST's to buy items inside SV.  If you\u2019re ready, walk into
+      the portal !\n"
+    responses: []

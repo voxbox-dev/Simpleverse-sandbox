@@ -64,6 +64,7 @@ Transform:
   m_Children:
   - {fileID: 121766282}
   - {fileID: 40280042556855223}
+  - {fileID: 4461286556240508486}
   - {fileID: 40280042897747902}
   - {fileID: 6062051209669364467}
   m_Father: {fileID: 0}
@@ -106,7 +107,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6062051209669364467}
   m_Layer: 0
-  m_Name: Models
+  m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -126,7 +127,7 @@ Transform:
   m_Children:
   - {fileID: 8993699109266948747}
   m_Father: {fileID: 505989759702451723}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2846690554895066217
 GameObject:
@@ -163,7 +164,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.966, y: 0}
+  m_AnchoredPosition: {x: 0.84, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &6663194168960681345
@@ -228,7 +229,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Teleport
+  m_text: 'Rec Room
 
 '
   m_isRightToLeft: 0
@@ -313,7 +314,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 76c3c41da4c6544dca201de9c80721ad,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 76c3c41da4c6544dca201de9c80721ad,
         type: 3}
@@ -323,7 +324,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 76c3c41da4c6544dca201de9c80721ad,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 5.4602
+      value: 2.2918065
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 76c3c41da4c6544dca201de9c80721ad,
         type: 3}
@@ -502,6 +503,86 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f0cbbfeeb1ae74b30beb44d2b335aa0c,
     type: 3}
   m_PrefabInstance: {fileID: 505989758957057116}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &4320752497534053244
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 505989759702451723}
+    m_Modifications:
+    - target: {fileID: 441293378984271109, guid: 8b7eb727b5b5342999d3a2ad7b79e794,
+        type: 3}
+      propertyPath: m_Name
+      value: CFXR3 Green Magic Aura TELEPORT
+      objectReference: {fileID: 0}
+    - target: {fileID: 441293378984271162, guid: 8b7eb727b5b5342999d3a2ad7b79e794,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 441293378984271162, guid: 8b7eb727b5b5342999d3a2ad7b79e794,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 441293378984271162, guid: 8b7eb727b5b5342999d3a2ad7b79e794,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 441293378984271162, guid: 8b7eb727b5b5342999d3a2ad7b79e794,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 441293378984271162, guid: 8b7eb727b5b5342999d3a2ad7b79e794,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 441293378984271162, guid: 8b7eb727b5b5342999d3a2ad7b79e794,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 441293378984271162, guid: 8b7eb727b5b5342999d3a2ad7b79e794,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 441293378984271162, guid: 8b7eb727b5b5342999d3a2ad7b79e794,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 441293378984271162, guid: 8b7eb727b5b5342999d3a2ad7b79e794,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 441293378984271162, guid: 8b7eb727b5b5342999d3a2ad7b79e794,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 441293378984271162, guid: 8b7eb727b5b5342999d3a2ad7b79e794,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 441293379042435521, guid: 8b7eb727b5b5342999d3a2ad7b79e794,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8b7eb727b5b5342999d3a2ad7b79e794, type: 3}
+--- !u!4 &4461286556240508486 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 441293378984271162, guid: 8b7eb727b5b5342999d3a2ad7b79e794,
+    type: 3}
+  m_PrefabInstance: {fileID: 4320752497534053244}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6428829019122887669
 PrefabInstance:

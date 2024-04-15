@@ -12,11 +12,14 @@ namespace Simpleverse
         private string speakerName;
         [SerializeField]
         private DialogueSO dialogue;
-        [SerializeField]
-        private float interactionDistance = 1f; // The distance from the NPC when interacting
 
         [SerializeField]
         private SpatialInteractable interactableContinue;
+
+        [SerializeField]
+        [Tooltip("Leave at 0 if there is no task to complete")]
+        private int completeTaskID = 0; // 0 means null since tasks start with id=1;
+
         private DialogueManager dialogueManager;
         private VirtualCameraManager virtualCameraManager;
         private PlayerController playerController;
@@ -60,20 +63,28 @@ namespace Simpleverse
             interactableContinue.gameObject.SetActive(false);
             playerController.DisablePlayerMove(false); // enable movement
             virtualCameraManager.DeactivateFirstPersonPOV();
+            if (completeTaskID > 0)
+            {
+                IQuestTask currentTask = SpatialBridge.questService.currentQuest.GetTaskByID((uint)completeTaskID);
+                Debug.Log("CURR TASK" + currentTask.id);
+                Debug.Log("CURR TASK" + currentTask.name);
+                currentTask.Complete();
+            }
+            else
+            {
+                Debug.Log("COMPLETE TASK ID is not set: " + completeTaskID);
+            }
         }
-
 
         void SpeakTo(int currNodeID)
         {
             if (dialogue.GetNodeByID(currNodeID) == null)
             {
                 OnEndInteract();
-
             }
             else
             {
                 dialogueManager.StartDialogue(dialogue, speakerName, currNodeID);
-
             }
         }
         void OnDestroy()
